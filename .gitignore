@@ -1,0 +1,9 @@
+*.swp 
+.DS_Store 
+/.settings 
+/work 
+/dist 
+/logs 
+.classpath 
+/target/classes 
+/target/
