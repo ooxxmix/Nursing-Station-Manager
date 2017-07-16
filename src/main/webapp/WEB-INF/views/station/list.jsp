@@ -11,15 +11,15 @@
 <body>
 	<table width="100%" border="1">
 		<tr>
-			<td>no</td>
+			<td>id</td>
 			<td>name</td>
 			<td>date</td>
 		</tr>
-		<c:forEach items="${list}" var="nurse">
+		<c:forEach items="${list}" var="station">
 			<tr>
-				<td>${nurse.no}</td>
-				<td>${nurse.name}</td>
-				<td>${nurse.createDate}</td>
+				<td>${station.id}</td>
+				<td>${station.name}</td>
+				<td>${station.createDate}</td>
 			</tr>
 		</c:forEach>
 	</table>

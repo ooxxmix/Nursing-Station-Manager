@@ -8,10 +8,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bionime.assignment.nursingstationManager.model.Nurse;
+import com.bionime.assignment.nursingstationManager.model.Station;
 
-@Repository("nurseDao")
-public class NurseDaoImpl implements NurseDao {
+@Repository("stationDao")
+public class StationDaoImpl implements StationDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -26,24 +26,23 @@ public class NurseDaoImpl implements NurseDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Nurse> list() {
-		Criteria criteria = getSession().createCriteria(Nurse.class);
-		return (List<Nurse>) criteria.list();
+	public List<Station> list() {
+		Criteria criteria = getSession().createCriteria(Station.class);
+		return (List<Station>) criteria.list();
 	}
 
 	@Override
-	public void update(Nurse t) {
+	public void update(Station t) {
 		getSession().saveOrUpdate(t);
 	}
 
 	@Override
-	public Nurse get(int id) {
-		return (Nurse) getSession().get(Nurse.class, id);
+	public Station get(int id) {
+		return (Station) getSession().get(Station.class, id);
 	}
 
 	@Override
 	public void delete(int id) {
 		getSession().delete(get(id));
 	}
-
 }

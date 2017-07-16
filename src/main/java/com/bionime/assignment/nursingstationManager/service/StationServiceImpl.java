@@ -6,32 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bionime.assignment.nursingstationManager.dao.NurseDao;
-import com.bionime.assignment.nursingstationManager.model.Nurse;
+import com.bionime.assignment.nursingstationManager.dao.StationDao;
+import com.bionime.assignment.nursingstationManager.model.Station;
 
-@Service("nurseService")
+@Service("stationService")
 @Transactional
-public class NurseServiceImpl implements com.bionime.assignment.nursingstationManager.service.Service<Nurse> {
+public class StationServiceImpl implements com.bionime.assignment.nursingstationManager.service.Service<Station> {
 
 	@Autowired
-	private NurseDao dao;
+	private StationDao dao;
 
-	public void setDao(NurseDao dao) {
+	public void setDao(StationDao dao) {
 		this.dao = dao;
 	}
 
 	@Override
-	public List<Nurse> list() {
+	public List<Station> list() {
 		return dao.list();
 	}
 
 	@Override
-	public void update(Nurse t) {
+	public void update(Station t) {
 		dao.update(t);
 	}
 
 	@Override
-	public Nurse get(int id) {
+	public Station get(int id) {
 		return dao.get(id);
 	}
 
