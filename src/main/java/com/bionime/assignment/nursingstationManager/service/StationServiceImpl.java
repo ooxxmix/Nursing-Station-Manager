@@ -24,6 +24,11 @@ public class StationServiceImpl implements com.bionime.assignment.nursingstation
 	public List<Station> list() {
 		return dao.list();
 	}
+	
+	@Override
+	public void add(Station t) {
+		dao.add(t);
+	}
 
 	@Override
 	public void update(Station t) {

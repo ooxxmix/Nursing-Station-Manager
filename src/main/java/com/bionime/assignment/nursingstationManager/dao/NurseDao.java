@@ -7,6 +7,8 @@ import com.bionime.assignment.nursingstationManager.model.Nurse;
 public interface NurseDao {
 
 	public List<Nurse> list();
+	
+	public void add(Nurse t);
 
 	public void update(Nurse t);
 

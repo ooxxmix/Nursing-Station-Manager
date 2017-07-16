@@ -8,9 +8,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bionime.assignment.nursingstationManager.model.Nurse;
 import com.bionime.assignment.nursingstationManager.model.Station;
 
-@Repository("stationDao")
+@Repository
 public class StationDaoImpl implements StationDao {
 
 	@Autowired
@@ -29,6 +30,11 @@ public class StationDaoImpl implements StationDao {
 	public List<Station> list() {
 		Criteria criteria = getSession().createCriteria(Station.class);
 		return (List<Station>) criteria.list();
+	}
+	
+	@Override
+	public void add(Station t) {
+		getSession().save(t);
 	}
 
 	@Override

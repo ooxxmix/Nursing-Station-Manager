@@ -26,6 +26,11 @@ public class NurseServiceImpl implements com.bionime.assignment.nursingstationMa
 	}
 
 	@Override
+	public void add(Nurse t) {
+		dao.add(t);
+	}
+	
+	@Override
 	public void update(Nurse t) {
 		dao.update(t);
 	}

@@ -1,5 +1,7 @@
 package com.bionime.assignment.nursingstationManager.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,25 +30,35 @@ public class StationController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public ModelAndView update(@PathVariable("id") int id) {
-		ModelAndView modelAndView = new ModelAndView("station/form");
-		Station station = stationService.get(id);
-		modelAndView.addObject("stationForm", station);
-		return modelAndView;
-	}
-
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView add() {
 		ModelAndView modelAndView = new ModelAndView("station/form");
 		Station station = new Station();
-		modelAndView.addObject("stationForm", station);
+		modelAndView.addObject("station", station);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView edit(@PathVariable("id") int id) {
+		ModelAndView modelAndView = new ModelAndView("station/form");
+		Station station = stationService.get(id);
+		modelAndView.addObject("station", station);
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("stationForm") Station station) {
-		stationService.update(station);
+	public ModelAndView save(@ModelAttribute("station") Station station) {
+		if (station.getId() == 0) {
+			station.setCreateDate(new Timestamp((new Date()).getTime()));
+			stationService.add(station);
+		} else
+			stationService.update(station);
+		return new ModelAndView("redirect:/station/list");
+	}
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable("id") int id) {
+		stationService.delete(id);
 		return new ModelAndView("redirect:/station/list");
 	}
 }

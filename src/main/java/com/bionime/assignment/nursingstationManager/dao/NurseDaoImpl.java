@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bionime.assignment.nursingstationManager.model.Nurse;
 
-@Repository("nurseDao")
+@Repository
 public class NurseDaoImpl implements NurseDao {
 
 	@Autowired
@@ -32,8 +32,13 @@ public class NurseDaoImpl implements NurseDao {
 	}
 
 	@Override
+	public void add(Nurse t) {
+		getSession().save(t);
+	}
+
+	@Override
 	public void update(Nurse t) {
-		getSession().saveOrUpdate(t);
+		getSession().update(t);
 	}
 
 	@Override
@@ -45,5 +50,4 @@ public class NurseDaoImpl implements NurseDao {
 	public void delete(int id) {
 		getSession().delete(get(id));
 	}
-
 }
