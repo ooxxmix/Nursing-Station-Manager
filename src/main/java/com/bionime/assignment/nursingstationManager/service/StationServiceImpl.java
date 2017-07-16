@@ -58,8 +58,4 @@ public class StationServiceImpl implements StationService {
 		return GroupNurse;
 	}
 
-	@Override
-	public void setNurses(Station station, String[] nurses) {
-	}
-	
 }

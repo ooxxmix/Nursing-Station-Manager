@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 @Entity()
 @Table(name = "nurse")
@@ -35,10 +36,11 @@ public class Nurse {
 	private Timestamp createDate;
 
 	// fetch = FetchType.LAZY,
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinTable(name = "nursingstation", joinColumns = {
-			@JoinColumn(name = "nid", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "sid", referencedColumnName = "id") })
+	// fetch = FetchType.EAGER,
+	@ManyToMany(targetEntity=Station.class, cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
+	@JoinTable(name = "nursingstation"
+			, joinColumns = {@JoinColumn(name = "nid", referencedColumnName = "id") }
+			, inverseJoinColumns = {@JoinColumn(name = "sid", referencedColumnName = "id") })
 	private Set<Station> stations = new HashSet<Station>(0);
 
 	public int getId() {
@@ -73,6 +75,7 @@ public class Nurse {
 		this.createDate = createDate;
 	}
 
+	@Transactional 
 	public Set<Station> getStations() {
 		return stations;
 	}

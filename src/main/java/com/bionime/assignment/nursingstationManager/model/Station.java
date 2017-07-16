@@ -4,15 +4,18 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
-@Entity()
+@Entity
 @Table(name = "station")
 public class Station {
 
@@ -27,8 +30,9 @@ public class Station {
 	@Column(name = "CREATEDATE")
 	private Timestamp createDate;
 
-	@ManyToMany(mappedBy = "stations")
-	private Set<Nurse> nurses = new HashSet<Nurse>(0);
+	// @ManyToMany(mappedBy = "stations")
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "stations", fetch = FetchType.EAGER)
+	private Set<Nurse> nurses;
 
 	public int getId() {
 		return id;
@@ -54,6 +58,7 @@ public class Station {
 		this.createDate = createDate;
 	}
 
+	@Transactional
 	public Set<Nurse> getNurses() {
 		return nurses;
 	}

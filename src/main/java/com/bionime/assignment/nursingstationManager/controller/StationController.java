@@ -28,6 +28,7 @@ public class StationController {
 		ModelAndView modelAndView = new ModelAndView("station/list");
 		List<Station> list = stationService.list();
 		modelAndView.addObject("list", list);
+		System.out.println(list.size());
 		return modelAndView;
 	}
 
@@ -38,19 +39,7 @@ public class StationController {
 		modelAndView.addObject("station", station);
 		return modelAndView;
 	}
-
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable("id") int id) {
-		ModelAndView modelAndView = new ModelAndView("station/form");
-		Station station = stationService.get(id);
-
-		List<Nurse> listNurse = stationService.getNurses(station);
-
-		modelAndView.addObject("nurses", listNurse);
-		modelAndView.addObject("station", station);
-		return modelAndView;
-	}
-
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("station") Station station) {
 		if (station.getId() == 0) {
@@ -59,6 +48,17 @@ public class StationController {
 		} else
 			stationService.update(station);
 		return new ModelAndView("redirect:/station/list");
+	}
+
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView edit(@PathVariable("id") int id) {
+		ModelAndView modelAndView = new ModelAndView("station/detail");
+		Station station = stationService.get(id);
+
+		List<Nurse> listNurse = stationService.getNurses(station);
+		modelAndView.addObject("nurses", listNurse);
+		modelAndView.addObject("station", station);
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

@@ -9,5 +9,4 @@ public interface StationService extends Service<Station> {
 
 	List<Nurse> getNurses(Station station);
 
-	void setNurses(Station station, String[] nurses);
 }
