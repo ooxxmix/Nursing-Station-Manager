@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.bionime.assignment.nursingstationManager.model.Nurse;
 import com.bionime.assignment.nursingstationManager.model.Station;
 
 @Repository

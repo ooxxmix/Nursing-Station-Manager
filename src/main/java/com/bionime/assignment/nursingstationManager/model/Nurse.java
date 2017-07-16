@@ -1,15 +1,22 @@
 package com.bionime.assignment.nursingstationManager.model;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-@Entity
+@Entity()
 @Table(name = "nurse")
 public class Nurse {
 
@@ -27,7 +34,12 @@ public class Nurse {
 	@Column(name = "CREATEDATE")
 	private Timestamp createDate;
 
-	// private Set<Station> stations = new HashSet<Station>(0);
+	// fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinTable(name = "nursingstation", joinColumns = {
+			@JoinColumn(name = "nid", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "sid", referencedColumnName = "id") })
+	private Set<Station> stations = new HashSet<Station>(0);
 
 	public int getId() {
 		return id;
@@ -61,16 +73,21 @@ public class Nurse {
 		this.createDate = createDate;
 	}
 
-	// @ManyToMany(cascade = CascadeType.ALL)
-	// @JoinTable(name = "nursingstation", joinColumns = { @JoinColumn(name = "NID")
-	// }, inverseJoinColumns = {
-	// @JoinColumn(name = "SID") })
-	// public Set<Station> getStations() {
-	// return stations;
-	// }
-	//
-	// public void setStations(Set<Station> stations) {
-	// this.stations = stations;
-	// }
+	public Set<Station> getStations() {
+		return stations;
+	}
 
+	public void setStations(Set<Station> stations) {
+		this.stations = stations;
+	}
+
+	public void addStation(Station station) {
+		stations.add(station);
+		station.getNurses().add(this);
+	}
+
+	public void removeStation(Station station) {
+		stations.remove(station);
+		station.getNurses().remove(this);
+	}
 }

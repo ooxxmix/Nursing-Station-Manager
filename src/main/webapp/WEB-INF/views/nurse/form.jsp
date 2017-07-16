@@ -69,12 +69,9 @@ select {
 
 			<div class="col-xs-5">
 				<select id="list1" multiple="multiple" size="8">
-					<c:forEach var="station" items="${listStation}" varStatus="status">
-						<c:choose>
-							<c:when test="${ active_station_map[station.id] == 0 }">
-								<option value="${station.id}">${station.name}</option>
-							</c:when>
-						</c:choose>
+					<c:forEach var="station" items="${list_not_active}"
+						varStatus="status">
+						<option value="${station.id}">${station.name}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -96,12 +93,8 @@ select {
 
 			<div class="col-xs-5">
 				<select id="list2" multiple="multiple" size="8">
-					<c:forEach var="station" items="${listStation}" varStatus="status">
-						<c:choose>
-							<c:when test="${ active_station_map[station.id] == 1 }">
-								<option value="${station.id}">${station.name}</option>
-							</c:when>
-						</c:choose>
+					<c:forEach var="station" items="${list_active}" varStatus="status">
+						<option value="${station.id}">${station.name}</option>
 					</c:forEach>
 				</select>
 			</div>

@@ -16,6 +16,9 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.bionime.assignment.nursingstationManager.model.Nurse;
+import com.bionime.assignment.nursingstationManager.model.Station;
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.bionime.assignment.nursingstationManager.config" })
@@ -28,6 +31,8 @@ public class HibernateConfiguration {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//		sessionFactory.setAnnotatedClasses(Nurse.class);
+//		sessionFactory.setAnnotatedClasses(Station.class);
 		sessionFactory.setDataSource(dataSource());
 		sessionFactory.setPackagesToScan(new String[] { "com.bionime.assignment.nursingstationManager.model" });
 		sessionFactory.setHibernateProperties(hibernateProperties());

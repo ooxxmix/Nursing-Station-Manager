@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bionime.assignment.nursingstationManager.model.Nurse;
 import com.bionime.assignment.nursingstationManager.model.Station;
-import com.bionime.assignment.nursingstationManager.service.Service;
+import com.bionime.assignment.nursingstationManager.service.StationService;
 
 @RequestMapping(value = "/station")
 @Controller
 public class StationController {
 
 	@Autowired
-	Service<Station> stationService;
+	StationService stationService;
 
 	@RequestMapping(value = "/list")
 	public ModelAndView list() {
@@ -42,6 +43,10 @@ public class StationController {
 	public ModelAndView edit(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView("station/form");
 		Station station = stationService.get(id);
+
+		List<Nurse> listNurse = stationService.getNurses(station);
+
+		modelAndView.addObject("nurses", listNurse);
 		modelAndView.addObject("station", station);
 		return modelAndView;
 	}

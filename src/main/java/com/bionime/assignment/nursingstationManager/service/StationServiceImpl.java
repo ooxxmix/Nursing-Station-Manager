@@ -1,5 +1,7 @@
 package com.bionime.assignment.nursingstationManager.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bionime.assignment.nursingstationManager.dao.StationDao;
+import com.bionime.assignment.nursingstationManager.model.Nurse;
 import com.bionime.assignment.nursingstationManager.model.Station;
 
 @Service("stationService")
 @Transactional
-public class StationServiceImpl implements com.bionime.assignment.nursingstationManager.service.Service<Station> {
+public class StationServiceImpl implements StationService {
 
 	@Autowired
 	private StationDao dao;
@@ -24,7 +27,7 @@ public class StationServiceImpl implements com.bionime.assignment.nursingstation
 	public List<Station> list() {
 		return dao.list();
 	}
-	
+
 	@Override
 	public void add(Station t) {
 		dao.add(t);
@@ -44,4 +47,19 @@ public class StationServiceImpl implements com.bionime.assignment.nursingstation
 	public void delete(int id) {
 		dao.delete(id);
 	}
+
+	@Override
+	public List<Nurse> getNurses(Station station) {
+		List<Nurse> GroupNurse = new ArrayList<Nurse>();
+		Iterator<Nurse> iterator = station.getNurses().iterator();
+		while (iterator.hasNext()) {
+			GroupNurse.add(iterator.next());
+		}
+		return GroupNurse;
+	}
+
+	@Override
+	public void setNurses(Station station, String[] nurses) {
+	}
+	
 }
