@@ -15,6 +15,10 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE DATABASE IF NOT EXISTS `nursingstationmanager` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE `nursingstationmanager`;
+
 --
 -- Table structure for table `nurse`
 --
@@ -68,5 +72,11 @@ CREATE TABLE `station` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+create user 'smile'@'%' identified by 'smile';
+--GRANT ALL PRIVILEGES ON nursingstationmanager.* TO 'smile'@'%';
+GRANT ALL ON nursingstationmanager.* TO 'smile'@'%' IDENTIFIED BY 'smile';
+
+--FLUSH PRIVILEGES;
 
 -- Dump completed on 2017-07-15 16:36:55
